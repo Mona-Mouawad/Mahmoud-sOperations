@@ -2,17 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../domain/models/analysis_model.dart';
-import '../../resources/color_manager.dart';
-import '../../Widgets/my_drawer.dart';
 import '../../Widgets/menu_appbar.dart';
+import '../../Widgets/my_drawer.dart';
+import '../../resources/color_manager.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/values_manager.dart';
 import 'card_analysis.dart';
 import 'show_add_analysis_overlay.dart';
 
 class AnalysisListScreens extends StatelessWidget {
-
   final TextEditingController _itemNameController = TextEditingController();
 
   AnalysisListScreens({super.key});
@@ -26,17 +26,15 @@ class AnalysisListScreens extends StatelessWidget {
           resizeToAvoidBottomInset: true,
           // resizeToAvoidBottomInset: false,
           appBar: menuAppBar(context, title: AppStrings.analysis),
-          drawer: MyDrawer(),
+          drawer: const MyDrawer(),
           body: Consumer<AnalysisModel>(
             builder: (context, analysis, _) {
-              log(
-                  "analysis.analysisList  ${analysis.analysisList.length}");
+              log("analysis.analysisList  ${analysis.analysisList.length}");
               return Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p20,
-                        vertical: AppPadding.p20),
+                        horizontal: AppPadding.p20, vertical: AppPadding.p20),
                     child: TextFormField(
                       controller: _itemNameController,
                       decoration: const InputDecoration(
@@ -60,8 +58,7 @@ class AnalysisListScreens extends StatelessWidget {
                                     builder: (context) {
                                       return AlertDialog(
                                         content: ShowEditAnalysisOverLay(
-                                            item,
-                                            _itemNameController.text),
+                                            item, _itemNameController.text),
                                       );
                                     });
                               },
@@ -80,11 +77,9 @@ class AnalysisListScreens extends StatelessWidget {
             radius: AppSize.s28,
             backgroundColor: AppColors.primary,
             child: IconButton(
-              icon:
-                  Icon(Icons.add, color: AppColors.white, size: AppSize.s28),
+              icon: Icon(Icons.add, color: AppColors.white, size: AppSize.s28),
               onPressed: () {
-                showAddAnalysisOverLay(
-                    context,_itemNameController.text);
+                showAddAnalysisOverLay(context, _itemNameController.text);
               },
             ),
           ),

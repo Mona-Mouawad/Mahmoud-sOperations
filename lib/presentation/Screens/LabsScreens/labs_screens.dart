@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../data/reportsModel/lab_report_data.dart';
 import '../../Widgets/list_tile_items.dart';
-import '../../Widgets/my_drawer.dart';
 import '../../Widgets/menu_appbar.dart';
+import '../../Widgets/my_drawer.dart';
 import '../../resources/routes_manger.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/values_manager.dart';
@@ -18,7 +19,7 @@ class LabsScreens extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: menuAppBar(context, title: AppStrings.labs),
-        drawer: MyDrawer(),
+        drawer: const MyDrawer(),
         body: Center(
           child: Card(
             margin: const EdgeInsets.all(AppMargin.m30),
@@ -31,14 +32,18 @@ class LabsScreens extends StatelessWidget {
                     Navigator.pushNamed(context, Routes.labsListScreens);
                   }),
                   listTileItems(context, AppStrings.addNewLab, () {
-                    showAddLabItemOverLay(context, AppStrings.addNewLab,""); }),
+                    showAddLabItemOverLay(context, AppStrings.addNewLab, "");
+                  }),
                   listTileItems(context, AppStrings.labReportDaily, () {
-                    Provider.of<LabReportModel>(context,listen: false).labReportList=[] ;
+                    Provider.of<LabReportModel>(context, listen: false)
+                        .labReportList = [];
                     Navigator.pushNamed(context, Routes.labDayReportScreen);
                   }),
                   listTileItems(context, AppStrings.labReportMonthly, () {
-                    Provider.of<LabReportModel>(context,listen: false).labReportList=[] ;
-                    Navigator.pushNamed(context, Routes.labMonthlyReportScreen); }),
+                    Provider.of<LabReportModel>(context, listen: false)
+                        .labReportList = [];
+                    Navigator.pushNamed(context, Routes.labMonthlyReportScreen);
+                  }),
                 ],
               ),
             ),
@@ -47,6 +52,4 @@ class LabsScreens extends StatelessWidget {
       ),
     );
   }
-
-
 }

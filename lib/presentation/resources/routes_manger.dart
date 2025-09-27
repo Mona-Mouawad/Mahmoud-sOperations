@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../Screens/AnalysisScreen/analysis_list_screens.dart';
-import '../Screens/AnalysisScreen/analysis_screens.dart';
 import '../Screens/AnalysisScreen/analysis_report_screen.dart';
+import '../Screens/AnalysisScreen/analysis_screens.dart';
 import '../Screens/LabsScreens/lab_day_report_screen.dart';
 import '../Screens/LabsScreens/lab_monthly_report_screen.dart';
 import '../Screens/LabsScreens/labs_list_screens.dart';
@@ -18,15 +19,18 @@ class Routes {
   static const String mainRout = '/main';
 
   static const String representativesScreens = "/representativesScreens";
-  static const String representativesListScreens = "/representativesListScreens";
+  static const String representativesListScreens =
+      "/representativesListScreens";
   static const String labsScreens = "/labsScreens";
   static const String labsListScreens = "/labsListScreens";
   static const String analysisScreens = "/analysisScreens";
   static const String analysisListScreens = "/analysisListScreens";
   static const String searchWidgetFilter = "/searchWidgetFilter";
   static const String analysisReportScreen = "/analysisReportScreen";
-  static const String representativeDayReportScreen = "/RepresentativeDayReportScreen";
-  static const String representativeMonthlyReportScreen = "/representativeMonthlyReportScreen";
+  static const String representativeDayReportScreen =
+      "/RepresentativeDayReportScreen";
+  static const String representativeMonthlyReportScreen =
+      "/representativeMonthlyReportScreen";
   static const String labDayReportScreen = "/LabDayReportScreen";
   static const String labMonthlyReportScreen = "/labMonthlyReportScreen";
   // static const String printerScreen = "/PrinterScreen";
@@ -36,15 +40,16 @@ class RouteGenerator {
   // BuildContext context
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case Routes.mainRout:
         return MaterialPageRoute(builder: (_) => const MainRoute());
 
       case Routes.representativesScreens:
-        return MaterialPageRoute(builder: (_) => const RepresentativesScreens());
+        return MaterialPageRoute(
+            builder: (_) => const RepresentativesScreens());
 
       case Routes.representativesListScreens:
-        return MaterialPageRoute(builder: (_) => const RepresentativesListScreens());
+        return MaterialPageRoute(
+            builder: (_) => const RepresentativesListScreens());
 
       case Routes.labsScreens:
         return MaterialPageRoute(builder: (_) => const LabsScreens());
@@ -58,22 +63,25 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const AnalysisScreens());
 
       case Routes.searchWidgetFilter:
-        return MaterialPageRoute(builder: (_) => NewRequest());
+        return MaterialPageRoute(builder: (_) => const NewRequest());
 
       case Routes.analysisReportScreen:
         return MaterialPageRoute(builder: (_) => const AnalysisReportScreen());
 
       case Routes.representativeDayReportScreen:
-        return MaterialPageRoute(builder: (_) => const RepresentativeDayReportScreen());
+        return MaterialPageRoute(
+            builder: (_) => const RepresentativeDayReportScreen());
 
       case Routes.representativeMonthlyReportScreen:
-        return MaterialPageRoute(builder: (_) => const RepresentativeMonthlyReportScreen());
+        return MaterialPageRoute(
+            builder: (_) => const RepresentativeMonthlyReportScreen());
 
       case Routes.labDayReportScreen:
         return MaterialPageRoute(builder: (_) => const LabDayReportScreen());
 
       case Routes.labMonthlyReportScreen:
-        return MaterialPageRoute(builder: (_) => const LabMonthlyReportScreen());
+        return MaterialPageRoute(
+            builder: (_) => const LabMonthlyReportScreen());
 
       // case Routes.printerScreen:
       //   return MaterialPageRoute(builder: (_) => printerScreen());

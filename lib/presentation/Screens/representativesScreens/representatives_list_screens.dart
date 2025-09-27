@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../data/representatives.dart';
 import '../../../domain/models/representative_model.dart';
-import '../../resources/color_manager.dart';
-import '../../Widgets/my_drawer.dart';
 import '../../Widgets/menu_appbar.dart';
+import '../../Widgets/my_drawer.dart';
+import '../../resources/color_manager.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/values_manager.dart';
 import 'overlays.dart';
@@ -18,18 +19,22 @@ class RepresentativesListScreens extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           appBar: menuAppBar(context, title: AppStrings.representatives),
-          drawer: MyDrawer(),
+          drawer: const MyDrawer(),
           body: Consumer<RepresentativeModel>(
             builder: (context, representative, _) {
               //  representative.getRepresentatives();
               return ListView(
                 children: representative.representativeList
-                    .map((item) =>cardItem(context,
-                    title:  item.representativeName!, onEditPressed: (){
-                      showEditItemOverLay(context, AppStrings.editRepresentativeName,item) ;
-                    }, onDeletePressed: (){
-                      Representatives.deleteRepresentativesById(item.representativeId!).then((value) => representative.getRepresentatives());
-                    }) )
+                    .map((item) => cardItem(context,
+                            title: item.representativeName!, onEditPressed: () {
+                          showEditItemOverLay(
+                              context, AppStrings.editRepresentativeName, item);
+                        }, onDeletePressed: () {
+                          Representatives.deleteRepresentativesById(
+                                  item.representativeId!)
+                              .then((value) =>
+                                  representative.getRepresentatives());
+                        }))
                     .toList(),
               );
             },
@@ -38,30 +43,28 @@ class RepresentativesListScreens extends StatelessWidget {
             radius: AppSize.s28,
             backgroundColor: AppColors.primary,
             child: IconButton(
-              icon: Icon(Icons.add ,color: AppColors.white,size: AppSize.s28),
-              onPressed: (){
+              icon: Icon(Icons.add, color: AppColors.white, size: AppSize.s28),
+              onPressed: () {
                 showAddItemOverLay(context, AppStrings.addRepresentatives);
               },
             ),
           ),
         ));
   }
-
-
-
 }
 
-
-Widget cardItem( context ,{required String title ,required VoidCallback onEditPressed,required VoidCallback onDeletePressed ,})
-{
+Widget cardItem(
+  context, {
+  required String title,
+  required VoidCallback onEditPressed,
+  required VoidCallback onDeletePressed,
+}) {
   return Container(
     height: AppSize.s60,
     margin: const EdgeInsets.symmetric(
-        vertical: AppMargin.m8,
-        horizontal: AppMargin.m20),
+        vertical: AppMargin.m8, horizontal: AppMargin.m20),
     decoration: BoxDecoration(
-        borderRadius:
-        BorderRadius.circular(AppSize.s20),
+        borderRadius: BorderRadius.circular(AppSize.s20),
         color: AppColors.white),
     clipBehavior: Clip.hardEdge,
     child: Row(
@@ -74,18 +77,28 @@ Widget cardItem( context ,{required String title ,required VoidCallback onEditPr
           width: AppSize.s10,
         ),
         Text(
-         title,
+          title,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        const Spacer( flex: 5),
-        IconButton(onPressed: onEditPressed , icon: Icon(Icons.edit,color: AppColors.primary,),
+        const Spacer(flex: 5),
+        IconButton(
+          onPressed: onEditPressed,
+          icon: Icon(
+            Icons.edit,
+            color: AppColors.primary,
+          ),
           splashColor: AppColors.white,
         ),
         const Spacer(),
-        IconButton(onPressed: onDeletePressed , icon: Icon(Icons.delete ,color: AppColors.error,),
-          splashColor: AppColors.white,),
+        IconButton(
+          onPressed: onDeletePressed,
+          icon: Icon(
+            Icons.delete,
+            color: AppColors.error,
+          ),
+          splashColor: AppColors.white,
+        ),
       ],
     ),
-  ) ;
+  );
 }
-

@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:new_app_mahmoud/data/request.dart';
 import 'package:new_app_mahmoud/presentation/Widgets/my_drawer.dart';
 import 'package:provider/provider.dart';
+
 import '../../../domain/models/analysis_model.dart';
 import '../../../domain/models/labs_model.dart';
 import '../../../domain/models/representative_model.dart';
+import '../../Widgets/menu_appbar.dart';
+import '../../Widgets/my_button.dart';
+import '../../Widgets/show_date_picker.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/constants_manager.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/values_manager.dart';
-import '../../Widgets/my_button.dart';
-import '../../Widgets/menu_appbar.dart';
-import '../../Widgets/show_date_picker.dart';
 
 class NewRequest extends StatefulWidget {
- final bool delete ;
+  final bool delete;
 
   const NewRequest({super.key, this.delete = false});
 
@@ -57,7 +58,7 @@ class _NewRequestState extends State<NewRequest> {
             title: widget.delete
                 ? AppStrings.deleteRequest
                 : AppStrings.addRegister),
-        drawer: MyDrawer(),
+        drawer: const MyDrawer(),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(AppPadding.p20),
@@ -77,7 +78,8 @@ class _NewRequestState extends State<NewRequest> {
                     ),
                     InkWell(
                       onTap: () async {
-                      await  showDate(context, (value) => _getDay(value!)).then((value) => setState((){  }));
+                        await showDate(context, (value) => _getDay(value!))
+                            .then((value) => setState(() {}));
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 135,
@@ -482,8 +484,7 @@ class _NewRequestState extends State<NewRequest> {
                         state: ToastStates.error);
                   } else {
                     widget.delete
-                        ? InsertTotDB
-                            .removeRequest(context,
+                        ? InsertTotDB.removeRequest(context,
                                 date: _day,
                                 representativesId:
                                     representativeData!.representativeId!,
@@ -503,8 +504,7 @@ class _NewRequestState extends State<NewRequest> {
                               analysisToggle = false;
                             });
                           })
-                        : InsertTotDB
-                            .addRequest(context,
+                        : InsertTotDB.addRequest(context,
                                 date: _day,
                                 representativesId:
                                     representativeData!.representativeId!,
@@ -639,7 +639,8 @@ class _NewRequestState extends State<NewRequest> {
   }
 
   Widget _selectedAnalysisList(AnalysisData data, int index) {
-   final  TextEditingController analysisQuantityController = TextEditingController();
+    final TextEditingController analysisQuantityController =
+        TextEditingController();
     String analysisPriceController = data.analysisPrice.toString();
     analysisQuantityController.text = data.analysisQuantity.toString();
     return Container(

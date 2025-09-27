@@ -4,16 +4,16 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
+
 import '../../../data/reportsModel/representatives_report_data.dart';
 import '../../../generated/assets.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/values_manager.dart';
 
 class PrinterRepresentativeReportScreen extends StatelessWidget {
-final  String day1, day2 ,representativeName;
+  final String day1, day2, representativeName;
 
-
-const  PrinterRepresentativeReportScreen(
+  const PrinterRepresentativeReportScreen(
       {super.key,
       required this.representativeName,
       required this.day1,
@@ -33,7 +33,8 @@ const  PrinterRepresentativeReportScreen(
 Future<Uint8List> _generatePdf(RepresentativesReportData report, String day1,
     String day2, String labName) async {
   final pdf = pw.Document();
-  pw.Font font = pw.Font.ttf(await rootBundle.load(Assets.fontsNeoSansArabicMedium));
+  pw.Font font =
+      pw.Font.ttf(await rootBundle.load(Assets.fontsNeoSansArabicMedium));
   pdf.addPage(
     pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
@@ -45,7 +46,8 @@ Future<Uint8List> _generatePdf(RepresentativesReportData report, String day1,
                   child: pw.Text(labName,
                       style: pw.TextStyle(
                           fontSize: 18,
-                          font: font, color:PdfColor.fromInt(0x66197fff),
+                          font: font,
+                          color: const PdfColor.fromInt(0x66197fff),
                           renderingMode: PdfTextRenderingMode.fill),
                       textDirection: pw.TextDirection.rtl),
                 ),
@@ -80,23 +82,23 @@ Future<Uint8List> _generatePdf(RepresentativesReportData report, String day1,
                   // Table header
                   pw.TableRow(
                     children: [
-                      pw.SizedBox(height: 40,
-                        child: pw.Center(
-              child: pw.Text(AppStrings.price,
-                  style: pw.TextStyle(
-                      fontSize: 16,
-                      font: font,
-                      letterSpacing: 0,color:PdfColor.fromInt(0xff1976d2)
-                  )),
-                      )
-                      ),
+                      pw.SizedBox(
+                          height: 40,
+                          child: pw.Center(
+                            child: pw.Text(AppStrings.price,
+                                style: pw.TextStyle(
+                                    fontSize: 16,
+                                    font: font,
+                                    letterSpacing: 0,
+                                    color: const PdfColor.fromInt(0xff1976d2))),
+                          )),
                       pw.Center(
                         child: pw.Text(AppStrings.analysisNumber,
                             style: pw.TextStyle(
-                              fontSize: 16,
-                              font: font,
-                              letterSpacing: 0,color:PdfColor.fromInt(0xff1976d2)
-                            )),
+                                fontSize: 16,
+                                font: font,
+                                letterSpacing: 0,
+                                color: const PdfColor.fromInt(0xff1976d2))),
                       ),
                       pw.Padding(
                         padding: const pw.EdgeInsets.symmetric(
@@ -104,15 +106,17 @@ Future<Uint8List> _generatePdf(RepresentativesReportData report, String day1,
                         child: pw.Center(
                           child: pw.Text(AppStrings.labName,
                               style: pw.TextStyle(
-                                fontSize: 16,
-                                font: font,
-                                letterSpacing: 0,color:PdfColor.fromInt(0xff1976d2)
-                              )),
+                                  fontSize: 16,
+                                  font: font,
+                                  letterSpacing: 0,
+                                  color: const PdfColor.fromInt(0xff1976d2))),
                         ),
                       ),
                       pw.Center(
                         child: pw.Text('M',
-                            style: const pw.TextStyle(fontSize: 16,color:PdfColor.fromInt(0xff1976d2) )),
+                            style: const pw.TextStyle(
+                                fontSize: 16,
+                                color: PdfColor.fromInt(0xff1976d2))),
                       ),
                     ],
                   ),
@@ -146,7 +150,9 @@ Future<Uint8List> _generatePdf(RepresentativesReportData report, String day1,
                         ),
                         pw.Center(
                           child: pw.Text('${index + 1}',
-                              style: const pw.TextStyle(fontSize: 16,color:PdfColor.fromInt(0xff1976d2))),
+                              style: const pw.TextStyle(
+                                  fontSize: 16,
+                                  color: PdfColor.fromInt(0xff1976d2))),
                         ),
                       ],
                     ),
@@ -161,27 +167,26 @@ Future<Uint8List> _generatePdf(RepresentativesReportData report, String day1,
                   children: [
                     pw.Row(
                         mainAxisAlignment: pw.MainAxisAlignment.spaceAround,
-                      children: [
-                        pw.SizedBox(
-                          width: AppSize.s100,
-                          child: pw.Text("${AppStrings.charging} :",
-                              style: pw.TextStyle(
-                                fontSize: 20,
-                                font: font,
-                                letterSpacing: 0,
-                              )),
-                        ),
-                        pw.SizedBox(
-                          width: AppSize.s100,
-                          child: pw.Text("${report.chargingValue}",
-                              style: pw.TextStyle(
-                                fontSize: 20,
-                                font: font,
-                                letterSpacing: 0,
-                              )),
-                        ),
-                      ]
-                    ),
+                        children: [
+                          pw.SizedBox(
+                            width: AppSize.s100,
+                            child: pw.Text("${AppStrings.charging} :",
+                                style: pw.TextStyle(
+                                  fontSize: 20,
+                                  font: font,
+                                  letterSpacing: 0,
+                                )),
+                          ),
+                          pw.SizedBox(
+                            width: AppSize.s100,
+                            child: pw.Text("${report.chargingValue}",
+                                style: pw.TextStyle(
+                                  fontSize: 20,
+                                  font: font,
+                                  letterSpacing: 0,
+                                )),
+                          ),
+                        ]),
                     pw.Row(
                         mainAxisAlignment: pw.MainAxisAlignment.spaceAround,
                         children: [
@@ -204,30 +209,30 @@ Future<Uint8List> _generatePdf(RepresentativesReportData report, String day1,
                                 )),
                           ),
                         ]),
-
                   ]),
             ),
             pw.SizedBox(height: AppSize.s30),
             pw.Directionality(
                 textDirection: pw.TextDirection.rtl,
-                child: pw.Row(
-                    children: [
-                      pw.SizedBox(
-                        width: AppSize.s160,
-                        child: pw.Center(  child: pw.Text("${AppStrings.totalPrice} :",
-                            style: pw.TextStyle(
+                child: pw.Row(children: [
+                  pw.SizedBox(
+                    width: AppSize.s160,
+                    child: pw.Center(
+                      child: pw.Text("${AppStrings.totalPrice} :",
+                          style: pw.TextStyle(
                               fontSize: 20,
                               font: font,
-                              letterSpacing: 0,color:PdfColor.fromInt(0xff1976d2)
-                            )),
-                      ),),
-              pw.Text("${report.sum}",
-                            style: pw.TextStyle(
-                              fontSize: 20,
-                              font: font,
-                              letterSpacing: 0,color:PdfColor.fromInt(0xff1976d2)
-                            )),
-                    ])),
+                              letterSpacing: 0,
+                              color: const PdfColor.fromInt(0xff1976d2))),
+                    ),
+                  ),
+                  pw.Text("${report.sum}",
+                      style: pw.TextStyle(
+                          fontSize: 20,
+                          font: font,
+                          letterSpacing: 0,
+                          color: const PdfColor.fromInt(0xff1976d2))),
+                ])),
           ];
         },
         footer: (context) {
