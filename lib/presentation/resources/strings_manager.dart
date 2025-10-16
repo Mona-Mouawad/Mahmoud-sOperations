@@ -5,7 +5,8 @@ class AppStrings {
   static const representativesReportMonthly = 'تقرير المندوب الشهرى';
   static const labReportDaily = 'تقرير المعمل اليومى';
   static const labReportMonthly = 'تقرير المعمل الشهرى';
-  static const representativesReportWithAnalysis = 'تقرير المندوب على مستوى التحليل';
+  static const representativesReportWithAnalysis =
+      'تقرير المندوب على مستوى التحليل';
   static const labReport = "تقرير المعامل";
   static const analysisReport = "تقرير التحاليل";
   static const addRegister = "أدخال تعامل";
@@ -20,6 +21,7 @@ class AppStrings {
   static const analysis = "التحاليل";
   static const analysisNumber = "عدد التحاليل";
   static const labName = "اسم المعمل";
+  static const patientName = "اسم المريض";
   static const analysisName = "اسم التحليل";
   static const charging = "شحن";
   static const transmission = "انتقال";
@@ -27,6 +29,7 @@ class AppStrings {
   static const today = "اليوم";
   static const price = "السعر";
   static const representativeError = "برجاء ادخال اسم المندوب";
+  static const patientNameError = "برجاء ادخال اسم المريض";
   static const labError = "برجاء ادخال اسم المعمل";
   static const analysisError = "برجاء ادخال اللتحليل";
   static const priceError = "برجاء ادخال السعر";

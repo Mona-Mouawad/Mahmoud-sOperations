@@ -24,9 +24,11 @@ class NewRequest extends StatefulWidget {
 }
 
 class _NewRequestState extends State<NewRequest> {
+  TextEditingController patientName = TextEditingController();
   TextEditingController representativeNameController = TextEditingController();
   TextEditingController labNameController = TextEditingController();
   TextEditingController analysisNameController = TextEditingController();
+
   bool labToggle = false;
   bool representativeToggle = false;
   bool analysisToggle = false;
@@ -100,6 +102,44 @@ class _NewRequestState extends State<NewRequest> {
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: AppSize.s20,
+                ),
+                Card(
+                  child: TextFormField(
+                    controller: patientName,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return AppStrings.patientNameError;
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        prefixIcon: SizedBox(
+                          height: AppSize.s40,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: AppPadding.p5,
+                                horizontal: AppPadding.p20),
+                            child: Icon(
+                              Icons.person,
+                              size: AppSize.s28,
+                              color: AppColors.grey,
+                            ),
+                            // SvgPicture.asset(ImageAssets.location_tick,
+                            //     width: AppSize.s25),
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(AppSize.s14),
+                            borderSide: BorderSide(
+                              color: AppColors.primary,
+                              //     width: AppSize.s1_5,
+                            )),
+                        focusColor: AppColors.primary,
+                        labelText: AppStrings.patientName),
+                  ),
                 ),
                 const SizedBox(
                   height: AppSize.s20,
@@ -482,10 +522,16 @@ class _NewRequestState extends State<NewRequest> {
                         context: context,
                         text: AppStrings.analysisError,
                         state: ToastStates.error);
+                  } else if (patientName.text.isEmpty) {
+                    AppConstants.myToast(
+                        context: context,
+                        text: AppStrings.patientNameError,
+                        state: ToastStates.error);
                   } else {
                     widget.delete
                         ? InsertTotDB.removeRequest(context,
                                 date: _day,
+                                patientName: patientName.text,
                                 representativesId:
                                     representativeData!.representativeId!,
                                 labsId: labData!.labId!,
@@ -502,10 +548,12 @@ class _NewRequestState extends State<NewRequest> {
                               labToggle = false;
                               sum = 0;
                               analysisToggle = false;
+                              patientName.clear();
                             });
                           })
                         : InsertTotDB.addRequest(context,
                                 date: _day,
+                                patientName: patientName.text,
                                 representativesId:
                                     representativeData!.representativeId!,
                                 labsId: labData!.labId!,
@@ -522,6 +570,7 @@ class _NewRequestState extends State<NewRequest> {
                               labToggle = false;
                               sum = 0;
                               analysisToggle = false;
+                              patientName.clear();
                             });
                           });
                   }
