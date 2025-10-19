@@ -1,26 +1,26 @@
+import 'dart:developer';
+
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
+
 import '../generated/assets.dart';
 import 'createDB.dart';
 
 class Labs {
-
-  static  List<List<dynamic>> dataLabCSV = [];
+  static List<dynamic> dataLabCSV = [];
   static loadLabsCSV() async {
     final rawData = await rootBundle.loadString(Assets.csvLabs);
     List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
-    dataLabCSV = listData;
-    _insertLabs();
+    dataLabCSV = listData.first.toString().replaceAll('\n', ',').split(',');
+    await _insertLabs();
   }
 
- static   _insertLabs() async  {
+  static _insertLabs() async {
     for (var element in dataLabCSV) {
-       database.transaction((txn) => txn
-          .rawInsert(
-          'INSERT INTO Labs(LabsName) VALUES("${element[0]}")')
-        );
+      log("element in dataLabCSV $element");
+
+      await database.transaction((txn) =>
+          txn.rawInsert('INSERT INTO Labs(LabsName) VALUES(?)', [element]));
     }
   }
-
-
 }
